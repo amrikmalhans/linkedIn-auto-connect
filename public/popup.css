@@ -1,0 +1,11 @@
+.popup {
+  width: 200px;
+  height: 200px;
+}
+
+#connect {
+  background-color: #0088ff;
+  margin: 10px;
+  border: 1px solid #212121;
+  border-radius: 25px;
+}

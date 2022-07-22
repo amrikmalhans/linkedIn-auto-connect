@@ -1,26 +1,35 @@
 // Initialize button with user's preferred color
-const upVote = document.getElementById("upvote");
+const connectEl = document.getElementById("connect");
 
-upVote!.addEventListener("click", async () => {
+connectEl!.addEventListener("click", async () => {
   let [tab] = await chrome.tabs.query({ active: true, currentWindow: true });
   chrome.scripting.executeScript({
     target: { tabId: tab.id! },
-    func: voteUp,
+    func: connect,
   });
 });
 
-function voteUp(): void {
-  const voteUpBtn = document.querySelectorAll<HTMLElement>(
+async function connect(): Promise<void> {
+  const connectBtn = document.querySelectorAll<HTMLElement>(
     ".entity-result__actions .artdeco-button"
   );
 
-  voteUpBtn[0].click();
 
-  setTimeout(() => {
-    const upVote = document.querySelectorAll<HTMLElement>(
-      ".artdeco-modal__actionbar .ml1"
-    );
-    upVote[0].click();
-  }, 500);
+  connectBtn.forEach((btn, index) => {
+    // first click the connect button, the wait for the modal to appear, then click the send button
+    if (btn.innerText === "Connect") {
+      setTimeout(() => {
+        btn.click();
+      }, index * 5000);
 
+      setTimeout(() => {
+        const send = document.querySelectorAll<HTMLElement>(
+          ".artdeco-modal__actionbar .ml1"
+        )[0];
+        send.click();
+      }, index * 5000 + 1000);
+    } else {
+      console.log("not connect");
+    }
+  });
 }
