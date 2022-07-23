@@ -18,17 +18,19 @@ const connectToPeople = (): void => {
   const linkendInconnectBtnEl = document.querySelectorAll<HTMLElement>(
     ".entity-result__actions .artdeco-button"
   );
-  const linkendInSendBtnEl = document.querySelector(
-    ".artdeco-button.ml1"
-  ) as HTMLElement;
   const linkedInModalEl = document.querySelector(
     "#artdeco-modal-outlet"
   ) as HTMLElement;
 
   // make a mutation observer to wait for the modal to be loaded and click the send button
   const observer = new MutationObserver(() => {
-    if (linkendInSendBtnEl) {
-      linkendInSendBtnEl.click();
+    if (document.querySelector(".artdeco-button.ml1")) {
+      const linkendInSendBtnEl = document.querySelector(
+        ".artdeco-button.ml1"
+      ) as HTMLElement;
+      if (linkendInSendBtnEl.innerText === "Send") {
+        linkendInSendBtnEl.click();
+      }
     }
   });
 

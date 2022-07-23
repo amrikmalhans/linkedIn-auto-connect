@@ -15,12 +15,14 @@ using MutationObserver. There's a set delay between each 'Connect' button click.
 */
 const connectToPeople = () => {
     const linkendInconnectBtnEl = document.querySelectorAll(".entity-result__actions .artdeco-button");
-    const linkendInSendBtnEl = document.querySelector(".artdeco-button.ml1");
     const linkedInModalEl = document.querySelector("#artdeco-modal-outlet");
     // make a mutation observer to wait for the modal to be loaded and click the send button
     const observer = new MutationObserver(() => {
-        if (linkendInSendBtnEl) {
-            linkendInSendBtnEl.click();
+        if (document.querySelector(".artdeco-button.ml1")) {
+            const linkendInSendBtnEl = document.querySelector(".artdeco-button.ml1");
+            if (linkendInSendBtnEl.innerText === "Send") {
+                linkendInSendBtnEl.click();
+            }
         }
     });
     // Loop through all the 'Connect' buttons and click them with a delay
