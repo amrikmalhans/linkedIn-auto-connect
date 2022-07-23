@@ -101,3 +101,8 @@ progress::-webkit-progress-value {
   background-color: #378fe9;
   color: #fafafa;
 }
+
+.clicked {
+  background-color: #378fe9;
+  color: #fafafa;
+}
