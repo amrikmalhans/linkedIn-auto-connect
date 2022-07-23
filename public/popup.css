@@ -86,7 +86,7 @@ progress::-webkit-progress-value {
   align-items: center;
 }
 
-#connect {
+.connect-btn {
   background-color: #fafafa;
   border: 1px solid #378fe9;
   border-radius: 50px;
@@ -96,7 +96,7 @@ progress::-webkit-progress-value {
   padding: 10px;
 }
 
-#connect:hover {
+.connect-btn:hover {
   cursor: pointer;
   background-color: #378fe9;
   color: #fafafa;
