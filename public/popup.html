@@ -1,13 +1,33 @@
 <!DOCTYPE html>
 <html>
+  <head>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;700&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="popup.css" />
+  </head>
 
-<head>
-    <link rel="stylesheet" href="popup.css">
-</head>
+  <body class="popup">
+    <div class="header">
+      <h1 class="heading">AutoConnect</h1>
+      <img src="assets/icons8-linkedin.svg" class="logo" alt="logo" />
+    </div>
 
-<body class="popup">
-    <button id="connect">Connect</button>
+    <div class="total-connects">
+      <div class="total-connects-info">
+        <h2>Total connects this week:</h2>
+        <p>1</p>
+      </div>
+
+      <progress id="file" value="42" max="100">42%</progress>
+    </div>
+
+    <div class="btn-div">
+      <button id="connect">Start Connecting</button>
+    </div>
     <script src="js/popup.js"></script>
-</body>
-
+  </body>
 </html>

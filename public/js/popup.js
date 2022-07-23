@@ -12,7 +12,7 @@ async function connect() {
     const connectBtn = document.querySelectorAll(".entity-result__actions .artdeco-button");
     // make a mutation observer to wait for the modal to be loaded
     const observer = new MutationObserver(() => {
-        if (document.querySelector(".entity-result__actions")) {
+        if (document.querySelector(".artdeco-button.ml1")) {
             const send = document.querySelectorAll(".artdeco-button.ml1")[0];
             console.log(send);
             if (send.innerText === "Send") {
