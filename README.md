@@ -4,5 +4,5 @@ a chrome extension that will automate the LinkedIn connection for you
 
 
 
-https://user-images.githubusercontent.com/60037787/180660258-f40970dc-de9b-47c5-9751-fa20729e203b.mp4
 
+[Untitled.webm](https://user-images.githubusercontent.com/60037787/180660833-70d3008f-c109-4873-bcb1-5093ce5680ca.webm)
