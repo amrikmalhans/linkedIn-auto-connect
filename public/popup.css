@@ -4,7 +4,6 @@
   box-sizing: border-box;
 }
 
-
 .popup {
   width: 220px;
   height: 250px;
@@ -24,7 +23,7 @@
   height: 50px;
 }
 
-.heading {
+.header h1{
   font-size: 18px;
   font-weight: bold;
   color: #07080b;
@@ -86,7 +85,7 @@ progress::-webkit-progress-value {
   align-items: center;
 }
 
-#connect {
+.connect-btn {
   background-color: #fafafa;
   border: 1px solid #378fe9;
   border-radius: 50px;
@@ -96,8 +95,30 @@ progress::-webkit-progress-value {
   padding: 10px;
 }
 
-#connect:hover {
+.connect-btn:hover {
   cursor: pointer;
   background-color: #378fe9;
+  color: #fafafa;
+}
+
+.clicked {
+  background-color: #378fe9;
+  color: #fafafa;
+}
+
+.connect-btn-stop {
+  display: none;
+  background-color: #fafafa;
+  color: #ff4747;
+  border: 1px solid #ff4747;
+  border-radius: 50px;
+  font-size: 14px;
+  font-weight: bold;
+  padding: 10px;
+}
+
+.connect-btn-stop:hover {
+  cursor: pointer;
+  background-color: #ff4747;
   color: #fafafa;
 }

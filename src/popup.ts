@@ -1,49 +1,64 @@
-// Initialize button with user's preferred color
-const connectEl = document.getElementById("connect");
-
-connectEl!.addEventListener("click", async () => {
-  let [tab] = await chrome.tabs.query({ active: true, currentWindow: true });
-  chrome.scripting.executeScript({
-    target: { tabId: tab.id! },
-    func: connect,
+const getActiveTabURL = async (): Promise<chrome.tabs.Tab> => {
+  const tabs = await chrome.tabs.query({
+    currentWindow: true,
+    active: true,
   });
+
+  return tabs[0];
+};
+
+// Selecting and declaring all the elements on the page
+const popupConnectBtnEl = document.querySelector(".connect-btn") as HTMLElement;
+const popupStopConnectBtnEl = document.querySelector(
+  ".connect-btn-stop"
+) as HTMLElement;
+const totalConnectsEl = document.querySelector(
+  ".total-connect-number"
+) as HTMLElement;
+const progressBarEl = document.querySelector(
+  ".connect-progress"
+) as HTMLElement;
+
+// Add a click listener to the "start connecting" button, which will send a message to the content script to start the connection
+popupConnectBtnEl.addEventListener("click", async () => {
+  const { id } = await getActiveTabURL();
+
+  chrome.tabs.sendMessage(id!, {
+    type: "CONNECT",
+  });
+  popupConnectBtnEl.style.display = "none";
+  popupStopConnectBtnEl.style.display = "block";
 });
 
-async function connect(): Promise<void> {
-  const connectBtn = document.querySelectorAll<HTMLElement>(
-    ".entity-result__actions .artdeco-button"
-  );
+// Add a click listener to the "stop connecting" button, which will send a message to the content script to stop the connection
+popupStopConnectBtnEl.addEventListener("click", async () => {
+  const { id } = await getActiveTabURL();
 
-  // make a mutation observer to wait for the modal to be loaded
-  const observer = new MutationObserver(() => {
-    if (document.querySelector(".artdeco-button.ml1")) {
-      const send = document.querySelectorAll<HTMLElement>(
-        ".artdeco-button.ml1"
-      )[0];
-      console.log(send);
+  chrome.tabs.sendMessage(id!, {
+    type: "STOP",
+  });
+  popupConnectBtnEl.style.display = "block";
+  popupStopConnectBtnEl.style.display = "none";
+});
 
-      if (send.innerText === "Send") {
-        send.click();
-      }
+chrome.runtime.onMessage.addListener(async (obj) => {
+  if (obj.type === "SUCCESS") {
+    const sum = Number(totalConnectsEl.innerText) + obj.increment;
+    totalConnectsEl.innerText = sum.toString();
+    progressBarEl.setAttribute("value", sum.toString());
+  }
+
+  if (obj.type === "EXIT") {
+    popupConnectBtnEl.style.display = "block";
+    popupStopConnectBtnEl.style.display = "none";
+  }
+});
+
+document.addEventListener("DOMContentLoaded", async () => {
+  chrome.storage.sync.get("totalConnects", (obj) => {
+    if (obj.totalConnects) {
+      totalConnectsEl.innerText = obj.totalConnects.toString();
+      progressBarEl.setAttribute("value", obj.totalConnects.toString());
     }
   });
-
-  connectBtn.forEach((btn, index) => {
-    // first click the connect button, the wait for the modal to appear, then click the send button
-    if (btn.innerText === "Connect") {
-      setTimeout(() => {
-        btn.click();
-      }, index * 1000);
-    } else {
-      console.log("not connect");
-    }
-  });
-
-  observer.observe(
-    document.querySelector("#artdeco-modal-outlet") as HTMLElement,
-    {
-      childList: true,
-      subtree: true,
-    }
-  );
-}
+});
