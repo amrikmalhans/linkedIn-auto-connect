@@ -43,9 +43,8 @@ popupStopConnectBtnEl.addEventListener("click", async () => {
 
 chrome.runtime.onMessage.addListener(async (obj) => {
   if (obj.type === "SUCCESS") {
-    const sum = Number(totalConnectsEl.innerText) + obj.increment;
-    totalConnectsEl.innerText = sum.toString();
-    progressBarEl.setAttribute("value", sum.toString());
+    totalConnectsEl.innerText = obj.total.toString();
+    progressBarEl.setAttribute("value", obj.total.toString());
   }
 
   if (obj.type === "EXIT") {

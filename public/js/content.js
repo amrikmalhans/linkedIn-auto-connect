@@ -51,7 +51,7 @@ const connectToPeople = async () => {
                 // Send a message to the popup to update the total number of connects
                 chrome.runtime.sendMessage({
                     type: "SUCCESS",
-                    increment: 1,
+                    total: totalConnects ? totalConnects + 1 : 1,
                 });
             }
         }
